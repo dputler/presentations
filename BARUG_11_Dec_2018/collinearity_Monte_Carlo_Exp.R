@@ -1,6 +1,9 @@
 # This script performs a Monte Carlo experiment to look at the effect of
 # how increasing sample sizes interplay with correlated predictors.
 
+# Base path for the plots (please provide)
+basePath_sc <- ""
+
 # A helper function to determine the count of incorrect coefficient signs
 wrong_sign <- function(x) {
   a0_si <- sum(as.numeric(x[,1] < 0))
@@ -121,7 +124,7 @@ sampSz2500_l <- experiment(2500, coefs_vn, coefNames_vc, corMat = corMatHigh_mn,
 smlLims_vn <- range(sampSz50_l$Betas$x1)
 
 # Create the analysis histograms
-png(filename = "C:/Users/dputler/Work/Collinearity/plot1.png",
+png(filename = paste0(basePath_sc, "/plot1.png"),
     width = 600,
     height = 600)
 layoutMat_mn <- rbind(c(1, 1, 2, 2),
@@ -134,7 +137,7 @@ custom_hist(sampSz50Mod_l$Betas$x1, xlim = smlLims_vn, breaks = 16, xlab = "Esti
 custom_hist(sampSz50_l$Betas$x1, xlim = smlLims_vn, breaks = 16, xlab = "Estimate of b1", main = "High Collinearity Case", lcex = 1.2, pcex = 1.4)
 dev.off()
 
-png(filename = "C:/Users/dputler/Work/Collinearity/plot2.png",
+png(filename = paste0(basePath_sc, "/plot2.png"),
     width = 600,
     height = 600)
 layout(matrix(1:4, nrow = 2, ncol = 2, byrow = TRUE))
@@ -144,7 +147,7 @@ custom_hist(sampSz150_l$Betas$x1, xlim = smlLims_vn, breaks = 16, xlab = "Estima
 custom_hist(sampSz200_l$Betas$x1, xlim = smlLims_vn, breaks = 16, xlab = "Estimate of b1", main = "Sample Size 200", lcex = 0.95, pcex = 1.2)
 dev.off()
 
-png(filename = "C:/Users/dputler/Work/Collinearity/plot3.png",
+png(filename = paste0(basePath_sc, "/plot3.png"),
     width = 600,
     height = 300)
 layout(matrix(1:2, nrow = 1, ncol = 2, byrow = TRUE))
